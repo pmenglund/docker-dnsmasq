@@ -1,0 +1,15 @@
+#!/bin/bash
+
+DEFAULT_CONF="/etc/dnsmasq.conf"
+ALT_CONF="/etc/dnsmasq/config"
+
+if [ -f $ALT_CONF ]; then
+	CONFIG=$ALT_CONF
+else
+	CONFIG=$DEFAULT_CONF
+fi
+
+# start incrond so that we can watch the hosts file
+/usr/sbin/incrond
+
+/usr/sbin/dnsmasq -C $CONFIG
